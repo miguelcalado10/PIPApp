@@ -54,7 +54,7 @@ export class AuthenticationService {
 
         // console.log( 'Token: ' + this.storage.get(TOKEN_KEY) );
         this.storage.get(TOKEN_KEY).then(function(value) {
-          // console.log( 'Token: ' + value );
+          console.log( 'Token: ' + value );
         });
 
       })

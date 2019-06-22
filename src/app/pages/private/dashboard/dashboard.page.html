@@ -5,10 +5,30 @@
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>Documentos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-list>
+    <ion-item>
+      <a class="item" href="#">
+        <ion-label>Documento 1</ion-label>
+      </a>
+    </ion-item>
+    <ion-item>
+      <a class="item" href="#">
+        <ion-label>Documento 2</ion-label>
+      </a>
+    </ion-item>
+
+    <!-- <ion-item *ngFor="let i of files">
+      <a class="item" href="#">
+          {{i.name}}
+      </a>
+    </ion-item> -->
+
+  </ion-list>
 
 </ion-content>

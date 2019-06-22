@@ -1,0 +1,79 @@
+// import { Injectable } from '@angular/core';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class FilesService {
+
+//   constructor() { }
+// }
+
+
+
+import { Platform } from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Storage } from '@ionic/storage';
+
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Headers } from '@angular/http';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { AuthResponse } from '../auth/auth-response';
+import { HttpObserve } from '@angular/common/http/src/client';
+
+const TOKEN_KEY = '';
+@Injectable({
+  providedIn: 'root'
+})
+export class FilesService {
+
+  AUTH_SERVER_ADDRESS  =  'http://localhost/pip-p.develop/delta/api/files.php';
+  authenticationState = new BehaviorSubject(false);
+
+  constructor( private  httpClient: HttpClient, private storage: Storage, private plt: Platform ) {
+    this.plt.ready().then( () => {
+      this.checkToken();
+    } )
+  }
+
+  checkToken() {
+
+    return this.storage.get(TOKEN_KEY).then( res => {
+      if( res ) {
+        this.authenticationState.next(true);
+      }
+    })
+
+  }
+
+  getFiles( token: string ) {
+
+    // let headers = new Headers({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': 'Bearer ' + this.storage.get(TOKEN_KEY)
+    // });
+
+    const header = new HttpHeaders();
+    header.append('Authorization', 'Bearer ' + token);
+    header.append('Content-Type', 'application/json');
+
+    // let header = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   Authorization: 'Bearer ' + token 
+    // });
+
+    // let headers = {
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    //   'Authorization': 'Bearer ' + token
+    // };
+
+    // let options = new RequestOptions({ headers: headers });
+    console.log(header);
+
+    return this.httpClient.get( `${this.AUTH_SERVER_ADDRESS}`, { headers: header } );
+  }
+
+}
