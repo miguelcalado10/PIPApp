@@ -1,0 +1,7 @@
+{
+  "name": "PIP_App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

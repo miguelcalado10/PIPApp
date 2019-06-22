@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content>
+
+  <ion-button (click)="loginApi()" expand="block">Login</ion-button>
+
+</ion-content> -->
+
+<ion-content color="primary" padding>
+
+    <form [formGroup]="loginForm" class="login-container" (ngSubmit)="loginApi()">
+    <!-- <form #form="ngForm" (ngSubmit)="login()"> -->
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h3>Login</h3>
+            </div>
+            <div padding>
+              <ion-item margin-bottom>
+                <!-- <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input> -->
+                <ion-input name="email" type="email" placeholder="E-mail" formControlName="email" required></ion-input>
+              </ion-item>
+
+              <p *ngIf="isSubmitted && formControls.email.errors">
+                <ion-label color="light" *ngIf="formControls.email.errors.required">O e-mail é obrigatório</ion-label>
+              </p>
+
+              <ion-item>
+                <ion-input name="password" type="password" placeholder="Password" formControlName="password" required></ion-input>
+              </ion-item>
+
+              <p *ngIf="isSubmitted && formControls.password.errors">
+                <ion-label color="light" *ngIf="formControls.password.errors.required">A password é obrigatória</ion-label>
+              </p>
+
+            </div>
+            <div padding>
+              <ion-button size="large" type="submit" expand="block">Login</ion-button>
+              <!-- <ion-button (click)="login()" expand="block">Login</ion-button> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  <!-- <form [formGroup]="loginForm" class="login-container" (ngSubmit)="login()">
+
+    <p [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+      <input type="email" placeholder="Email" formControlName="email">
+    </p>
+
+    <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
+      <div *ngIf="formControls.email.errors.required">Email is required</div>
+    </div>
+
+    <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+      <input type="password" placeholder="Password" formControlName="password">
+    </p>
+
+    <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+      <div *ngIf="formControls.password.errors.required">Password is required</div>
+    </div>
+
+    <p>
+      <input type="submit" value="Log in">
+    </p>
+  </form> -->
+</ion-content>
