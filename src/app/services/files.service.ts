@@ -20,9 +20,6 @@ import { Headers } from '@angular/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AuthResponse } from '../auth/auth-response';
-import { HttpObserve } from '@angular/common/http/src/client';
-
 const TOKEN_KEY = '';
 @Injectable({
   providedIn: 'root'
