@@ -55,9 +55,14 @@ export class FilesService {
     //   'Authorization': 'Bearer ' + this.storage.get(TOKEN_KEY)
     // });
 
-    const header = new HttpHeaders();
-    header.append('Authorization', 'Bearer ' + token);
-    header.append('Content-Type', 'application/json');
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type':'application/json'
+    });
+    // headers = headers.set('Authorization', 'Bearer ' + token)
+    // headers = headers.set('Content-Type', 'application/json')
+    // header.append('Authorization', 'Bearer ' + token);
+    // header.append('Content-Type', 'application/json');
 
     // let header = new HttpHeaders({
     //   'Content-Type': 'application/json',
@@ -71,9 +76,10 @@ export class FilesService {
     // };
 
     // let options = new RequestOptions({ headers: headers });
-    console.log(header);
+    console.log(headers.get('Authorization'));
+    console.log(headers.get('Content-Type'));
 
-    return this.httpClient.get( `${this.AUTH_SERVER_ADDRESS}`, { headers: header } );
+    return this.httpClient.get( `${this.AUTH_SERVER_ADDRESS}`, { headers: headers } );
   }
 
 }

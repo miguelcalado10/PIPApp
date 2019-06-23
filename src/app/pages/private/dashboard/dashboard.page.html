@@ -12,7 +12,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item>
+    <!-- <ion-item>
       <a class="item" href="#">
         <ion-label>Documento 1</ion-label>
       </a>
@@ -21,13 +21,13 @@
       <a class="item" href="#">
         <ion-label>Documento 2</ion-label>
       </a>
-    </ion-item>
-
-    <!-- <ion-item *ngFor="let i of files">
-      <a class="item" href="#">
-          {{i.name}}
-      </a>
     </ion-item> -->
+
+    <ion-item *ngFor="let file of files">
+      <a class="item" href="#">
+          {{file.name}}
+      </a>
+    </ion-item>
 
   </ion-list>
 
