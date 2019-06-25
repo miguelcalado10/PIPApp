@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Documentos</ion-title>
+    <ion-title>Documents</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,12 +23,33 @@
       </a>
     </ion-item> -->
 
-    <ion-item *ngFor="let file of files">
-      <a class="item" href="#">
-          {{file.name}}
-      </a>
+    <ion-item class="item" lines="none" *ngFor="let file of files">
+      <!-- <a href="#"> -->
+      <div class="item__wrapper">
+
+        <div class="item-title">
+          <div class="title__wrapper">
+            <div class="title">
+              {{file.name}}
+            </div>
+          </div>
+        </div>
+
+        <div class="item-icon">
+            <ion-icon name="download" size="large"></ion-icon>
+        </div>
+
+      </div>
+      <!-- </a> -->
     </ion-item>
 
   </ion-list>
+
+  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
 
 </ion-content>
