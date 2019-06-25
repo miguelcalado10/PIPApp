@@ -45,7 +45,7 @@ export class FilesService {
 
   }
 
-  getFiles( token: string ) {
+  getFiles(token: string) {
 
     // let headers = new Headers({
     //   'Content-Type': 'application/json',
@@ -73,10 +73,21 @@ export class FilesService {
     // };
 
     // let options = new RequestOptions({ headers: headers });
-    console.log(headers.get('Authorization'));
-    console.log(headers.get('Content-Type'));
+    // console.log(headers.get('Authorization'));
+    // console.log(headers.get('Content-Type'));
 
     return this.httpClient.get( `${this.AUTH_SERVER_ADDRESS}`, { headers: headers } );
+  }
+
+  getFile(token: string, fileId: number) {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type':'application/json'
+    });
+
+    console.log(headers.get('Authorization'))
+
+    return this.httpClient.get( `${this.AUTH_SERVER_ADDRESS}?id=${fileId}`, { headers: headers } );
   }
 
 }

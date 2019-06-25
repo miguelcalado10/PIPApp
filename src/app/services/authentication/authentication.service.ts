@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { User } from './../../model/user.model'
-import { AuthResponse } from './../../model/auth-response.model';
+import { User } from './../../../model/user.model'
+import { AuthResponse } from './../../../model/auth-response.model';
 
 const TOKEN_KEY = '';
 @Injectable({
