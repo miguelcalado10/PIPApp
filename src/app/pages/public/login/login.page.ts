@@ -1,9 +1,10 @@
+import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
-import { User } from  '../../../auth/user';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ import { User } from  '../../../auth/user';
 export class LoginPage implements OnInit {
 
   // constructor( private authService: AuthenticationService ) { }
-  constructor(private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder ) { }
+  constructor(
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private alertCtrl: AlertController ) { }
 
   loginForm: FormGroup;
   isSubmitted = false;
@@ -26,6 +30,16 @@ export class LoginPage implements OnInit {
     });
   }
 
+  async alertMessage( title: string, subTitle: string, text: string, btnText: string) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      subHeader: subTitle,
+      message: text,
+      buttons: [btnText]
+   });
+    await alert.present();
+  }
+
   get formControls() { return this.loginForm.controls; }
 
   login() {
@@ -33,17 +47,34 @@ export class LoginPage implements OnInit {
   }
 
   loginApi(){
+
+    const content = $('.content__wrapper');
+    $(content).addClass('loading');
+
+    const loading = $('.content__loading');
+    $(loading).addClass('active');
+
     this.isSubmitted = true;
     this.isSubmitting = true;
 
-    if(this.loginForm.invalid){
+    if(this.loginForm.invalid) {
+      $(content).removeClass('loading');
+      $(loading).removeClass('active');
       return;
     }
 
-    // this.authService.loginApi( this.loginForm.value );
     this.authService.loginApi( this.loginForm.value ).subscribe( (res) => {
-      // console.log(res)
+      // console.log(res.email_exists)
+      // console.log(res.message)
+      // console.log(res.jwt)
+
       this.isSubmitting = false;
+      $(content).removeClass('loading');
+      $(loading).removeClass('active');
+
+      if( res.message === 'Invalid credentials' ) {
+        this.alertMessage( 'Error', 'Invalid credentials. Please try again', '', 'OK' );
+      }
     });
 
     // this.isSubmitting = false;

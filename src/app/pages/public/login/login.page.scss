@@ -1,0 +1,87 @@
+@import '../../../../theme/variables.scss';
+
+.content {
+    position: relative;
+
+    .content__wrapper {
+        float: left;
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%,-50%);
+
+        &.loading {
+            opacity: 0.3;
+        }
+
+        .logo-card {
+            border-radius: unset;
+            box-shadow: unset;
+
+            .logo-img {
+                width: 100%;
+                // width: 50%;
+                // margin-left: auto;
+                // margin-right: auto;
+            }
+        }
+
+        .login-form {
+
+            .error-message {
+                text-align: center;
+                .message {
+                    text-align: center;
+                }
+            }
+
+        }
+    }
+
+    .content__loading {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        opacity: 0;
+        &.active {
+            display: block;
+            opacity: 1;
+
+            .loading__wrapper {
+                position: relative;
+                float: left;
+                width: 100%;
+                height: 100%;
+
+                .loading {
+                    position: absolute;
+                    top: 40%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    transform: scale(3);
+                    color: map-get($pip_logo , _green );
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (min-width: 614px) {
+
+    .content {
+        .content__wrapper {
+            .logo-card {
+                .logo-img {
+                    width: 50%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+
+}
