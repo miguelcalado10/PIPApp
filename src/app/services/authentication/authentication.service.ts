@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 import { User } from './../../../model/user.model'
 import { AuthResponse } from './../../../model/auth-response.model';
 
-const TOKEN_KEY = '';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +26,7 @@ export class AuthenticationService {
 
   login() {
 
-    return this.storage.set(TOKEN_KEY, 'teste12345').then( res => {
+    return this.storage.set('TOKEN_KEY', 'teste12345').then( res => {
       this.authenticationState.next( true );
     } );
 
@@ -45,7 +44,7 @@ export class AuthenticationService {
         if ( res['message'] === 'Success' ) {
           console.log( 'Sucesso' );
 
-          await this.storage.set(TOKEN_KEY, res['jwt']);
+          await this.storage.set('TOKEN_KEY', res['jwt']);
           this.authenticationState.next(true);
 
         } else {
@@ -53,7 +52,7 @@ export class AuthenticationService {
         }
 
         // console.log( 'Token: ' + this.storage.get(TOKEN_KEY) );
-        this.storage.get(TOKEN_KEY).then(function(value) {
+        this.storage.get('TOKEN_KEY').then(function(value) {
           console.log( 'Token: ' + value );
         });
 
@@ -63,11 +62,11 @@ export class AuthenticationService {
 
   logout() {
 
-    return this.storage.remove(TOKEN_KEY).then( () => {
+    return this.storage.remove('TOKEN_KEY').then( () => {
       this.authenticationState.next( false );
 
       // console.log( 'Token: ' + this.storage.get(TOKEN_KEY) );
-      this.storage.get(TOKEN_KEY).then(function(value) {
+      this.storage.get('TOKEN_KEY').then(function(value) {
         // console.log( 'Token: ' + value );
       });
     } );
@@ -82,7 +81,7 @@ export class AuthenticationService {
 
   checkToken() {
 
-    return this.storage.get(TOKEN_KEY).then( res => {
+    return this.storage.get('TOKEN_KEY').then( res => {
       if( res ) {
         this.authenticationState.next(true);
       }

@@ -38,7 +38,7 @@ export class DashboardPage implements OnInit {
     this.storage.get('TOKEN_KEY').then( (data) => {
 
       const token: string = data;
-      // console.log(token);
+      console.log(token);
 
       this.filesServices.getFiles( token ).subscribe( (res: any) => {
         console.log("Files subscribe");

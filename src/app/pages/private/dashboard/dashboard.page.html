@@ -23,7 +23,7 @@
       </a>
     </ion-item> -->
 
-    <ion-item class="item" lines="none" *ngFor="let file of files">
+    <ion-item class="item" lines="none" *ngFor="let file of files" (click)="getFile(file.id)">
       <!-- <a href="#"> -->
       <div class="item__wrapper">
 

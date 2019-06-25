@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../../services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';

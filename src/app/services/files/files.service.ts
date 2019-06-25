@@ -20,7 +20,6 @@ import { Headers } from '@angular/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-const TOKEN_KEY = '';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,7 +36,7 @@ export class FilesService {
 
   checkToken() {
 
-    return this.storage.get(TOKEN_KEY).then( res => {
+    return this.storage.get('TOKEN_KEY').then( res => {
       if( res ) {
         this.authenticationState.next(true);
       }
