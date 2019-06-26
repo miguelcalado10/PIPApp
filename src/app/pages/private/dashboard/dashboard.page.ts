@@ -21,8 +21,8 @@ export class DashboardPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  allFiles: Array<FileModel>;
-  files : Array<FileModel>;
+  token: string;
+  files: Array<FileModel>;
   screenHeight: number;
 
 // tslint:disable-next-line: max-line-length
@@ -37,40 +37,23 @@ export class DashboardPage implements OnInit {
 
     this.storage.get('TOKEN_KEY').then( (data) => {
 
-      const token: string = data;
-      console.log(token);
+      this.token = data;
+      console.log(this.token);
 
-      this.filesServices.getFiles( token ).subscribe( (res: any) => {
-        console.log("Files subscribe");
+      this.filesServices.getFiles( this.token, 0, 7 ).subscribe( (res: any) => {
+        // console.log("Files subscribe");
         console.log(res);
 
-        let i = 0;
-
-        this.allFiles = new Array<FileModel>();
         this.files = new Array<FileModel>();
 
         if ( res.files ) {
           res.files.forEach(element => {
-
-            // this.allFiles.push({
-            //   id: element.file_id,
-            //   name: element.filename,
-            //   s3_id: element.string,
-            //   date: element.file_date
-            // });
-
-            // // Apresenta primeiros 8
-            // if( i < 8) {
               this.files.push({
                 id: element.file_id,
                 name: element.filename,
                 s3_id: element.string,
                 date: element.file_date
               });
-            // }
-
-            // i++;
-
           });
         }
       });
@@ -144,32 +127,52 @@ export class DashboardPage implements OnInit {
    return new Blob(byteArrays, {type: contentType});
   }
 
-  // loadData(event) {
-  //   console.log(this.files.length)
-  //   console.log(this.allFiles.length)
+  loadData(event) {
 
-  //   setTimeout(() => {
+    const nextIndex = this.files.length;
 
-  //     for (let i = 0; i < 8; i++) {
-  //       let current = i + this.files.length;
+    setTimeout(() => {
 
-  //       if( current < this.allFiles.length ) {
-  //         this.files.push(this.allFiles[current]);
-  //       }
+      // this.storage.get('TOKEN_KEY').then( (data) => {
 
-  //     }
-  //     event.target.complete();
+        // const token: string = data;
 
-  //     if (this.files.length === 1000) {
-  //       event.target.disabled = true;
-  //     }
+      console.log(this.token)
+      console.log(nextIndex);
 
-  //   }, 500);
-  // }
+      this.filesServices.getFiles( this.token, nextIndex, 2 ).subscribe( (res: any) => {
+        // console.log("Files subscribe");
+        // console.log(res);
+
+        // this.files = new Array<FileModel>();
+
+        if ( res.files ) {
+          // console.log(res.files)
+          res.files.forEach(element => {
+              this.files.push({
+                id: element.file_id,
+                name: element.filename,
+                s3_id: element.string,
+                date: element.file_date
+              });
+          });
+          // console.log(this.files)
+        }
+      });
+
+      // })
+      event.target.complete();
+
+      if (this.files.length === 1000) {
+        event.target.disabled = true;
+      }
+
+    }, 500);
+  }
 
 
-  // toggleInfiniteScroll() {
-  //   this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-  // }
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
 
 }
