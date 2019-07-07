@@ -26,7 +26,7 @@ const TOKEN_KEY = '';
 })
 export class FilesService {
 
-  AUTH_SERVER_ADDRESS  =  'http://localhost/pip-p.develop/delta/api/files.php';
+  AUTH_SERVER_ADDRESS  =  'http://35.156.203.112/api/files.php';
   authenticationState = new BehaviorSubject(false);
 
   constructor( private  httpClient: HttpClient, private storage: Storage, private plt: Platform ) {

@@ -15,7 +15,7 @@ import { AuthResponse } from './../../../model/auth-response.model';
 })
 export class AuthenticationService {
 
-  AUTH_SERVER_ADDRESS  =  'http://localhost/pip-p.develop/delta/api/login.php';
+  AUTH_SERVER_ADDRESS  =  'http://35.156.203.112/api/login.php';
   authenticationState = new BehaviorSubject(false);
 
   constructor( private  httpClient: HttpClient, private storage: Storage, private plt: Platform ) {
@@ -34,7 +34,7 @@ export class AuthenticationService {
 
   // loginApi( email1: string, password1: string ): Observable<AuthResponse> {
   public loginApi(userInfo: User){
-    console.log('info: ' + JSON.stringify(userInfo))
+    console.log(userInfo)
 
     const body = {email: userInfo.email, password: userInfo.password};
 
